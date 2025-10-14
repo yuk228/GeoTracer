@@ -7,7 +7,7 @@ type FormValues = {
   token: string;
 };
 
-export function createUrlHooks() {
+export function useCreateUrlHooks() {
   const formik = useFormik({
     initialValues: {
       url: "",
