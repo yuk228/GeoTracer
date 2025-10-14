@@ -10,20 +10,18 @@ datasource db {
 }
 
 model Url {
-  id        Int       @id @default(autoincrement())
-  slug      String    @unique
-  redirectUrl String?
+  id             Int      @id @default(autoincrement())
+  slug           String   @unique
+  redirectUrl    String?
   discordWebhook String?
-  adminUuid     String    @unique @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  logs      Log[]
+  adminUuid      String   @unique @default(uuid())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  logs           Log[]
 }
 
 model Log {
-  id        Int       @id @default(autoincrement())
-  urlId     Int
-  url       Url       @relation(fields: [urlId], references: [id])
+  id        Int      @id @default(autoincrement())
   ipAddress String
   userAgent String
   referer   String?
@@ -31,4 +29,6 @@ model Log {
   longitude Float?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  urlId     Int
+  url       Url      @relation(fields: [urlId], references: [id])
 }

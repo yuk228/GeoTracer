@@ -1,4 +1,7 @@
-import { useFormik } from "formik";
+import { UrlResponse } from "@/entities/url";
+import { FormikProps, useFormik } from "formik";
+import { useRouter } from "next/navigation";
+import useSWRMutation from "swr/mutation";
 import * as yup from "yup";
 
 type FormValues = {
@@ -7,7 +10,29 @@ type FormValues = {
   token: string;
 };
 
+export type CreateUrlHooks = {
+  formik: FormikProps<FormValues>;
+  isMutating: boolean;
+  data: UrlResponse;
+};
+
 export function useCreateUrlHooks() {
+  const router = useRouter();
+  async function createUrl(
+    url: string,
+    { arg }: { arg: FormValues }
+  ): Promise<UrlResponse> {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(arg),
+    });
+    return response.json();
+  }
+
+  const { trigger, data, isMutating } = useSWRMutation("/api/url", createUrl);
   const formik = useFormik({
     initialValues: {
       url: "",
@@ -20,12 +45,19 @@ export function useCreateUrlHooks() {
       discordWebhook: yup.string().optional().url("Invalid URL"),
       token: yup.string().required("Solve the captcha to continue"),
     }),
-    onSubmit: (values: FormValues) => {
-      console.log(values);
+    onSubmit: async (values: FormValues) => {
+      try {
+        const response = await trigger(values);
+        router.push(`/dashboard/${response.adminUuid}`);
+      } catch (error) {
+        console.error(error);
+      }
     },
   });
 
   return {
     formik,
+    isMutating,
+    data,
   };
 }

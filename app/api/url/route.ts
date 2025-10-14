@@ -5,14 +5,14 @@ import { BadRequest } from "@/lib/apiResponse";
 
 export async function POST(request: NextRequest) {
   const { url, discordWebhook, token } = await request.json();
-
+  const slug = Math.random().toString(36).substring(2, 15);
   if (!(await validateToken(token))) {
     return BadRequest();
   }
 
   const result = await prisma.url.create({
     data: {
-      slug: url,
+      slug,
       discordWebhook,
       redirectUrl: url,
     },
