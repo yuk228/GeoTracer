@@ -65,7 +65,7 @@ export default function Page() {
             type="submit"
             disabled={isMutating || !formik.isValid}
           >
-            {isMutating ? "短縮中..." : "短縮する"}
+            {isMutating ? "Loading..." : "Shorten"}
           </Button>
 
           <Turnstile
