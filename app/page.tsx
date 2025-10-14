@@ -1,6 +1,9 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Navigation } from "lucide-react";
+import { Turnstile } from "next-turnstile";
 
 export default function Page() {
   return (
@@ -17,6 +20,7 @@ export default function Page() {
           aria-label="Discord Webhook URL"
         />
         <Button className="w-full">Shorten</Button>
+        <Turnstile siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!} />
       </div>
     </main>
   );

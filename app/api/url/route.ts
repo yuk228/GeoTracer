@@ -6,7 +6,7 @@ import { BadRequest } from "@/lib/apiResponse";
 export async function POST(request: NextRequest) {
   const { url, discordWebhook, token } = await request.json();
 
-  if (await validateToken(token)) {
+  if (!(await validateToken(token))) {
     return BadRequest();
   }
 
