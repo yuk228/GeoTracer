@@ -9,15 +9,25 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model Log {
+model Url {
   id        Int       @id @default(autoincrement())
   slug      String    @unique
+  redirectUrl String?
   discordWebhook String?
-  ipAddress   String
-  userAgent   String
-  referer     String?
-  latitude    Float?
-  longitude   Float?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  logs      Log[]
+}
+
+model Log {
+  id        Int       @id @default(autoincrement())
+  urlId     Int
+  url       Url       @relation(fields: [urlId], references: [id])
+  ipAddress String
+  userAgent String
+  referer   String?
+  latitude  Float?
+  longitude Float?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
