@@ -12,7 +12,7 @@ datasource db {
 model Url {
   id             Int      @id @default(autoincrement())
   slug           String   @unique
-  redirectUrl    String?
+  redirectUrl    String
   discordWebhook String?
   adminUuid      String   @unique @default(uuid())
   createdAt      DateTime @default(now())

@@ -1,4 +1,4 @@
-import { UrlResponse } from "@/entities/url";
+import { UrlDTO } from "@/entities/url";
 import { FormikProps, useFormik } from "formik";
 import { useRouter } from "next/navigation";
 import useSWRMutation from "swr/mutation";
@@ -13,7 +13,7 @@ type FormValues = {
 export type CreateUrlHooks = {
   formik: FormikProps<FormValues>;
   isMutating: boolean;
-  data: UrlResponse;
+  data: UrlDTO;
 };
 
 export function useCreateUrlHooks() {
@@ -21,7 +21,7 @@ export function useCreateUrlHooks() {
   async function createUrl(
     url: string,
     { arg }: { arg: FormValues }
-  ): Promise<UrlResponse> {
+  ): Promise<UrlDTO> {
     const response = await fetch(url, {
       method: "POST",
       headers: {

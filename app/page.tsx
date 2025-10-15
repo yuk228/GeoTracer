@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useCreateUrlHooks } from "@/lib/create-url-hooks";
+import { useCreateUrlHooks } from "@/lib/hooks/create-url-hooks";
 import { Navigation } from "lucide-react";
 import { Turnstile } from "next-turnstile";
 
