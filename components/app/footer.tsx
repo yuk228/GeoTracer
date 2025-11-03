@@ -1,7 +1,22 @@
+import Link from 'next/link'
+
 export function Footer() {
   return (
-    <footer className="flex flex-col md:flex-row items-center justify-center text-muted-foreground">
-      <p>Copyright © 2025 GeoTracer The source code is available on Github</p>
+    <footer className="py-5">
+      <div className="flex flex-col md:flex-row items-center justify-center text-muted-foreground gap-2">
+        <p>Copyright © 2025 GeoTracer</p>
+        <p>
+          The source code is available on{' '}
+          <span>
+            <Link
+              href="https://github.com/yuk228/geotracer"
+              className="hover:text-foreground transition-colors hover:underline"
+            >
+              Github
+            </Link>
+          </span>
+        </p>
+      </div>
     </footer>
   )
 }
