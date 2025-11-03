@@ -1,7 +1,7 @@
 import { prisma } from '@/prisma/prisma'
 import { NextRequest, NextResponse } from 'next/server'
-import { validateToken } from '@/lib/validateToken'
-import { BadRequest } from '@/lib/apiResponse'
+import { validateToken } from '@/services/validateToken'
+import { BadRequest } from '@/services/apiResponse'
 
 export async function POST(request: NextRequest) {
   const { url, discordWebhook, token } = await request.json()

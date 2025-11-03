@@ -1,7 +1,7 @@
 'use client'
 
-import { useCreateLogHooks } from '@/lib/hooks/logger/create-log-hooks'
-import { useUserLocation } from '@/lib/hooks/logger/user-location-hooks'
+import { useCreateLogHooks } from '@/services/hooks/logger/create-log-hooks'
+import { useUserLocation } from '@/services/hooks/logger/user-location-hooks'
 import { useParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { Button } from '@/components/ui/button'

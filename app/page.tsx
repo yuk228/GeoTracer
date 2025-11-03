@@ -2,18 +2,16 @@
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { useCreateUrlHooks } from '@/lib/hooks/create-url-hooks'
-import { Navigation } from 'lucide-react'
+import { useCreateUrlHooks } from '@/services/hooks/create-url-hooks'
+import { ErrorMessage } from '@/components/shared/error-message'
 import { Turnstile } from 'next-turnstile'
+import { Logo } from '@/components/shared/logo'
 
 export default function Page() {
-  const { formik, isMutating, data } = useCreateUrlHooks()
+  const { formik, isMutating } = useCreateUrlHooks()
   return (
-    <main className="flex flex-col items-center justify-center">
-      <div className="flex items-center gap-2 justify-center mt-20">
-        <Navigation size={48} />
-        <h1 className="text-4xl font-bold">GeoTracer</h1>
-      </div>
+    <main className="min-h-screen flex flex-col items-center justify-center">
+      <Logo />
       <div className="items-center justify-center mt-20 flex w-full max-w-md flex-col gap-2 px-4">
         <form onSubmit={formik.handleSubmit} className="w-full space-y-4">
           <div>
@@ -32,9 +30,7 @@ export default function Page() {
               }
             />
             {formik.errors.url && formik.touched.url && (
-              <p className="text-sm text-destructive mt-1">
-                {formik.errors.url}
-              </p>
+              <ErrorMessage>{formik.errors.url}</ErrorMessage>
             )}
           </div>
 
@@ -54,9 +50,7 @@ export default function Page() {
               }
             />
             {formik.errors.discordWebhook && formik.touched.discordWebhook && (
-              <p className="text-sm text-destructive mt-1">
-                {formik.errors.discordWebhook}
-              </p>
+              <ErrorMessage>{formik.errors.discordWebhook}</ErrorMessage>
             )}
           </div>
 

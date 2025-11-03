@@ -1,5 +1,5 @@
 import { UrlDTO } from '@/entities/url'
-import { NotFound } from '@/lib/apiResponse'
+import { NotFound } from '@/services/apiResponse'
 import { prisma } from '@/prisma/prisma'
 import { NextRequest, NextResponse } from 'next/server'
 
