@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button'
 export default function Page() {
   const params = useParams()
   const slug = params.slug as string
-  const { formik, isMutating, data } = useCreateLogHooks({ slug: slug })
+  const { formik, isMutating } = useCreateLogHooks({ slug: slug })
   const location = useUserLocation()
 
   useEffect
