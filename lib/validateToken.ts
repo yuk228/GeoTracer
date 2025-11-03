@@ -1,17 +1,17 @@
-import { validateTurnstileToken } from "next-turnstile";
+import { validateTurnstileToken } from 'next-turnstile'
 
 export async function validateToken(token: string) {
   try {
     const result = await validateTurnstileToken({
       token,
-      secretKey: process.env.TURNSTILE_SECRET_KEY || "",
-    });
+      secretKey: process.env.TURNSTILE_SECRET_KEY || '',
+    })
 
     if (result.success) {
-      return true;
+      return true
     }
   } catch (error) {
-    console.error("Validation failed:", error);
+    console.error('Validation failed:', error)
   }
-  return false;
+  return false
 }

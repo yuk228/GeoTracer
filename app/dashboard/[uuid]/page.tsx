@@ -1,14 +1,14 @@
-"use client";
+'use client'
 
-import { useUrlHooks } from "@/lib/hooks/url-hooks";
-import { useParams } from "next/navigation";
+import { useUrlHooks } from '@/lib/hooks/url-hooks'
+import { useParams } from 'next/navigation'
 
 export default function Page() {
-  const params = useParams();
-  const uuid = params.uuid as string;
-  const { data, isLoading } = useUrlHooks({ uuid });
+  const params = useParams()
+  const uuid = params.uuid as string
+  const { data, isLoading } = useUrlHooks({ uuid })
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
   return (
@@ -31,18 +31,18 @@ export default function Page() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {`${process.env.NEXT_PUBLIC_BASE_URL ?? ""}/${data.slug}`}
+                  {`${process.env.NEXT_PUBLIC_BASE_URL ?? ''}/${data.slug}`}
                 </a>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Redirect URL</p>
                 <a
                   className="text-sm underline break-all"
-                  href={data.redirectUrl ?? "#"}
+                  href={data.redirectUrl ?? '#'}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {data.redirectUrl ?? "(未設定)"}
+                  {data.redirectUrl ?? '(未設定)'}
                 </a>
               </div>
               <div>
@@ -97,12 +97,12 @@ export default function Page() {
                         </td>
                         <td
                           className="px-3 py-2 max-w-[28rem] truncate"
-                          title={log.referer ?? ""}
+                          title={log.referer ?? ''}
                         >
-                          {log.referer ?? "-"}
+                          {log.referer ?? '-'}
                         </td>
-                        <td className="px-3 py-2">{log.latitude ?? "-"}</td>
-                        <td className="px-3 py-2">{log.longitude ?? "-"}</td>
+                        <td className="px-3 py-2">{log.latitude ?? '-'}</td>
+                        <td className="px-3 py-2">{log.longitude ?? '-'}</td>
                       </tr>
                     ))
                   )}
@@ -115,5 +115,5 @@ export default function Page() {
         <div className="rounded-lg border p-4">データが見つかりません</div>
       )}
     </main>
-  );
+  )
 }

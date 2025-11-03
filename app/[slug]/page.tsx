@@ -1,25 +1,27 @@
-"use client";
+'use client'
 
-import { useCreateLogHooks } from "@/lib/hooks/logger/create-log-hooks";
-import { useUserLocation } from "@/lib/hooks/logger/user-location-hooks";
-import { useParams } from "next/navigation";
-import { useEffect } from "react";
-import { Button } from "@/components/ui/button";
+import { useCreateLogHooks } from '@/lib/hooks/logger/create-log-hooks'
+import { useUserLocation } from '@/lib/hooks/logger/user-location-hooks'
+import { useParams } from 'next/navigation'
+import { useEffect } from 'react'
+import { Button } from '@/components/ui/button'
 
 export default function Page() {
-  const params = useParams();
-  const slug = params.slug as string;
-  const { formik, isMutating, data } = useCreateLogHooks({ slug: slug });
-  const location = useUserLocation();
+  const params = useParams()
+  const slug = params.slug as string
+  const { formik, isMutating, data } = useCreateLogHooks({ slug: slug })
+  const location = useUserLocation()
+
+  useEffect
 
   useEffect(() => {
     if (location) {
-      formik.setFieldValue("latitude", location.latitude);
-      formik.setFieldValue("longitude", location.longitude);
+      formik.setFieldValue('latitude', location.latitude)
+      formik.setFieldValue('longitude', location.longitude)
     }
-    formik.setFieldValue("referer", window.document.referrer || "");
+    formik.setFieldValue('referer', window.document.referrer || '')
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location?.latitude, location?.longitude]);
+  }, [location?.latitude, location?.longitude])
 
   return (
     <main className="flex min-h-screen items-center justify-center px-6">
@@ -33,10 +35,10 @@ export default function Page() {
 
         <form onSubmit={formik.handleSubmit} className="mt-6">
           <Button type="submit" className="w-full" disabled={isMutating}>
-            {isMutating ? "確認中..." : "続行"}
+            {isMutating ? '確認中...' : '続行'}
           </Button>
         </form>
       </div>
     </main>
-  );
+  )
 }

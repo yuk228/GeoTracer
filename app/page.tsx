@@ -1,13 +1,13 @@
-"use client";
+'use client'
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { useCreateUrlHooks } from "@/lib/hooks/create-url-hooks";
-import { Navigation } from "lucide-react";
-import { Turnstile } from "next-turnstile";
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { useCreateUrlHooks } from '@/lib/hooks/create-url-hooks'
+import { Navigation } from 'lucide-react'
+import { Turnstile } from 'next-turnstile'
 
 export default function Page() {
-  const { formik, isMutating, data } = useCreateUrlHooks();
+  const { formik, isMutating, data } = useCreateUrlHooks()
   return (
     <main className="flex flex-col items-center justify-center">
       <div className="flex items-center gap-2 justify-center mt-20">
@@ -27,8 +27,8 @@ export default function Page() {
               onBlur={formik.handleBlur}
               className={
                 formik.errors.url && formik.touched.url
-                  ? "border-destructive"
-                  : ""
+                  ? 'border-destructive'
+                  : ''
               }
             />
             {formik.errors.url && formik.touched.url && (
@@ -49,8 +49,8 @@ export default function Page() {
               onBlur={formik.handleBlur}
               className={
                 formik.errors.discordWebhook && formik.touched.discordWebhook
-                  ? "border-destructive"
-                  : ""
+                  ? 'border-destructive'
+                  : ''
               }
             />
             {formik.errors.discordWebhook && formik.touched.discordWebhook && (
@@ -65,15 +65,15 @@ export default function Page() {
             type="submit"
             disabled={isMutating || !formik.isValid}
           >
-            {isMutating ? "Loading..." : "Shorten"}
+            {isMutating ? 'Loading...' : 'Shorten'}
           </Button>
 
           <Turnstile
             siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY!}
-            onVerify={token => formik.setFieldValue("token", token)}
+            onVerify={token => formik.setFieldValue('token', token)}
           />
         </form>
       </div>
     </main>
-  );
+  )
 }

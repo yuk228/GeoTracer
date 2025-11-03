@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
 export type UserLocation = {
-  latitude: number;
-  longitude: number;
-  altitude?: number;
-  accuracy: number;
-};
+  latitude: number
+  longitude: number
+  altitude?: number
+  accuracy: number
+}
 
 export function useUserLocation(): UserLocation {
-  const [location, setLocation] = useState<UserLocation | null>(null);
+  const [location, setLocation] = useState<UserLocation | null>(null)
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -19,7 +19,7 @@ export function useUserLocation(): UserLocation {
             longitude: position.coords.longitude,
             altitude: position.coords.altitude ?? undefined,
             accuracy: position.coords.accuracy,
-          });
+          })
         },
         () => {
           setLocation({
@@ -27,16 +27,16 @@ export function useUserLocation(): UserLocation {
             longitude: 0,
             altitude: 0,
             accuracy: 0,
-          });
+          })
         },
         {
           enableHighAccuracy: true,
           timeout: 10000,
           maximumAge: 0,
         }
-      );
+      )
     }
-  }, []);
+  }, [])
 
-  return location as UserLocation;
+  return location as UserLocation
 }

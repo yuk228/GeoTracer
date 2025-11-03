@@ -1,13 +1,13 @@
-import { prisma } from "@/prisma/prisma";
-import { NextRequest, NextResponse } from "next/server";
-import { validateToken } from "@/lib/validateToken";
-import { BadRequest } from "@/lib/apiResponse";
+import { prisma } from '@/prisma/prisma'
+import { NextRequest, NextResponse } from 'next/server'
+import { validateToken } from '@/lib/validateToken'
+import { BadRequest } from '@/lib/apiResponse'
 
 export async function POST(request: NextRequest) {
-  const { url, discordWebhook, token } = await request.json();
-  const slug = Math.random().toString(36).substring(2, 15);
+  const { url, discordWebhook, token } = await request.json()
+  const slug = Math.random().toString(36).substring(2, 15)
   if (!(await validateToken(token))) {
-    return BadRequest();
+    return BadRequest()
   }
 
   const result = await prisma.url.create({
@@ -16,7 +16,14 @@ export async function POST(request: NextRequest) {
       discordWebhook,
       redirectUrl: url,
     },
-  });
+    select: {
+      redirectUrl: true,
+      discordWebhook: true,
+      adminUuid: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  })
 
-  return NextResponse.json(result);
+  return NextResponse.json(result)
 }
