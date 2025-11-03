@@ -5,9 +5,9 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { uuid: string } }
+  context: { params: Promise<{ uuid: string }> }
 ) {
-  const { uuid } = params
+  const { uuid } = await context.params
   const data = await prisma.url.findFirst({
     where: { adminUuid: uuid },
     include: {
