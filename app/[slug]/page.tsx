@@ -12,8 +12,6 @@ export default function Page() {
   const { formik, isMutating } = useCreateLogHooks({ slug: slug })
   const location = useUserLocation()
 
-  useEffect
-
   useEffect(() => {
     if (location) {
       formik.setFieldValue('latitude', location.latitude)
